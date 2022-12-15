@@ -80,4 +80,5 @@ def cli():
         response = webhook.send(text=f"morning stats\n```{text}```")
         logger.debug("Slack webhook response: %s", response)
         sys.exit(0)
-    sys.exit(1)
+
+    logger.warning("There is no text to send.")
