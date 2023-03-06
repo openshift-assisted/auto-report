@@ -9,6 +9,8 @@ from slack_sdk.webhook import WebhookClient
 from .release_stats import ReleaseStats
 from .release_formatter import format_releases_to_text
 
+TIME_RANGE_IN_WEEKS = 6
+
 
 def get_custom_format() -> str:
     """
@@ -66,7 +68,7 @@ def cli():
         logger=logger
     )
     releases = release_stats.get(
-        from_date="now-6w/d",
+        from_date=f"now-{TIME_RANGE_IN_WEEKS}w/d",
         to_date="now/d",
         top_n=3
     )
@@ -77,7 +79,9 @@ def cli():
 
     if text:
         webhook = WebhookClient(slack_webhook_url)
-        response = webhook.send(text=f"morning stats\n```{text}```")
+        response = webhook.send(
+            text=f"morning stats from the past {TIME_RANGE_IN_WEEKS} weeks\n```{text}```"
+        )
         logger.debug("Slack webhook response: %s", response)
         sys.exit(0)
 
