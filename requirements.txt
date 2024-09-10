@@ -3,3 +3,4 @@ opensearch-py~=1.1.0
 requests~=2.26.0
 slack_sdk~=3.18.3
 wheel~=0.41.2
+setuptools~=74.1.2
