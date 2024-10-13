@@ -36,7 +36,7 @@ RUN --mount=type=tmpfs,destination=/root/.cache\
     python3 -m pip install -r requirements.txt
 
 COPY . ./
-RUN python3 -m pip install .
+RUN python3 -m pip install . pip-licenses && pip-licenses -l -f json --output-file /licenses/licenses.json
 
 USER 1001:1001
 
